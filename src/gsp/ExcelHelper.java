@@ -12,44 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 
 public class ExcelHelper {
-	private static Logger log = Logger.getLogger(ExcelHelper.class);
 	public static String imgList;
 	public static String errorMsg;
 	public static boolean status;
-
-	public static void logInfo(String msg) {
-		log.info(msg);
-	}
-
-	/**
-	 * Log exception with define format.
-	 * 
-	 * @param msg
-	 * @param t
-	 */
-	public static void logException(String msg, Throwable t) {
-		log.error("==================Exception=================");
-		log.error(msg, t);
-		log.error("====================next====================");
-	}
-
-	/**
-	 * Log error that occur during the case run. not *Exception*.
-	 * 
-	 * @param msg
-	 */
-	public static void logError(String msg) {
-		log.error("====================Error===================");
-		log.error(msg);
-		log.error("====================next====================");
-	}
 
 	/**
 	 * Example: upperFirst("test") => "Test"
@@ -77,19 +48,19 @@ public class ExcelHelper {
 						data = br.readLine();
 					}
 				} else {
-					ExcelHelper.logError("Target file has nothing!");
+					System.out.println("Target file has nothing!");
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
-			ExcelHelper.logException("Cannot find file or file cannot be reading!", e.fillInStackTrace());
+			System.out.println("Cannot find file or file cannot be reading!");
 		} finally {
 			try {
 				br.close();
 			} catch (IOException e) {
-				ExcelHelper.logException("Cannot close input stream!", e.fillInStackTrace());
+				System.out.println("Cannot close input stream!");
 			}
 		}
 		return list;
@@ -106,13 +77,13 @@ public class ExcelHelper {
 			is = new FileInputStream(f);
 			wb = new HSSFWorkbook(is);
 		} catch (Exception e) {
-			ExcelHelper.logException("Cannot find file or file cannot be reading!", e.fillInStackTrace());
+			System.out.println("Cannot find file or file cannot be reading!");
 		} finally {
 			try {
 				if (null != is)
 					is.close();
 			} catch (IOException e) {
-				ExcelHelper.logException("Cannot close input stream!", e.fillInStackTrace());
+				System.out.println("Cannot close input stream!");
 			}
 		}
 		if (null != wb) {
@@ -142,7 +113,7 @@ public class ExcelHelper {
 			}
 
 		} else {
-			ExcelHelper.logError("Excel file has nothing!");
+			System.out.println("Excel file has nothing!");
 		}
 		return hashResult;
 	}

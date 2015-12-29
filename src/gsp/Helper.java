@@ -29,7 +29,7 @@ public class Helper {
 	public static Properties getProperties() throws IOException {
 		InputStream inputStream;
 		Properties prop = new Properties();
-		String propFileName = "config.properties";
+		String propFileName = "./config.properties";
 		inputStream = GSPDemo.class.getClassLoader().getResourceAsStream(propFileName);
 		if (inputStream != null) {
 			prop.load(inputStream);
